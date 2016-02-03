@@ -1,5 +1,5 @@
 
-function hash = hashstr(str)
+function [hash] = hashstr(str)
 % This function generates a hash value from a text string or array of strings
 %
 % inputs,
@@ -18,10 +18,11 @@ function hash = hashstr(str)
 
 
 % From string to double array
-str=double(str);
-hash = zeros(size(str,1),1);
-for i=1:size(str,2), 
-    hash = mod(hash * 65599 + str(:,i), 2^32-1);
+hash = zeros(size(str));
+for i=1:size(str,2)
+    for c=str{1,i}
+        hash(i) = mod(hash(i) * 65599 + double(c), 2^32-1);
+    end
 end
 
 end
