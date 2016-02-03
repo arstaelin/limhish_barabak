@@ -12,6 +12,9 @@ function hash = hashstr(str)
 %  ndbm) database library. it was found to do well in scrambling bits, 
 %  causing better distribution of the keys and fewer splits. it also happens
 %  to be a good general hashing function with good distribution.
+%
+% Taken from: http://www.mathworks.com/matlabcentral/fileexchange/27940-string2hash/
+% content/string2hash.m
 
 
 % From string to double array
