@@ -1,11 +1,11 @@
 
 function [hash] = hashstr(str)
-% This function generates a hash value from a text string or array of strings
+% This function generates an array of hash values from a cell of strings
 %
 % inputs,
-%   str : The text string, or array with text strings.
+%   str : The text string cell.
 % outputs,
-%   hash : The hash value, integer value between 0 and 2^32-1
+%   hash : The hash value array, integer value between 0 and 2^32-1
 %
 % sdbm
 %  this algorithm was created for sdbm (a public-domain reimplementation of
