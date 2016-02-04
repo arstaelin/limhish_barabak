@@ -1,6 +1,8 @@
-function [classes] = knn_class_param(moedl, data, k):
-  classes = zeros(sizeof(data, 1), 1);
-  for i = 1:sizeof(data, 1)
-    classes[i] = knn_class_param_single(model, data(i), k);
-  end
+function [classes] = knn_class_param(model, data, k):
+  data = knn_train(data, zeros(size(data, 1), 1);
+  distances = pdist2(data, model, @knn_dist);
+  [~, ind] = sort(distances, 2);
+  ind = ind(:,1:k);
+  classes = reshape(model(ind,2), size(ind, 1), k);
+  classes = mode(classes, 2);
 end
