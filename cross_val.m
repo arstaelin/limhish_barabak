@@ -1,11 +1,18 @@
-function [ accuracy ] = cross_val( data, labels, ftrain, ftest, vector)
+function [ accuracy ] = cross_val( data, labels, ftrain, ftest)
 %CROSS_VAL recieves as input the data, a training function, a testing
-% function and a function to data to a vector, and returns accuracy.
-
-% vectorize data:
-for i=1:size(data, 1)
-    data{i} = vector(data{i});
-end
+% function, and returns accuracy.
+%
+%   input:
+%   data - an nX1 cell of vectors
+%   labels - an nX1 vector of labels
+%   ftrain - a function handle that recieves (data,labels) as arguments
+%       and returns a model for predictions.
+%   ftest - a function handle that recieves (model, data) and returns a
+%       a vector of labels.
+%
+%   output:
+%   accuracy - 10-fold cross-validation accuracy of ftrain and ftest on
+%       data
 
 % shuffle data:
 I = randperm(size(labels,1));
