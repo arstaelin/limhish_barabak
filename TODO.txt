@@ -1,5 +1,12 @@
-Stuff:
 
-text2vec.m
-train.m
-predict.m
+Ideas:
+*) matlab nlp library ( should have stemming :D )
+*) also take into account length (bad reviews are shorter?)
+*) use word2vec to get more data from words
+*) try higher level nlp things
+*) look at word pairs and more
+
+What we have done so far:
+*) wrote 'general' code (read files and vectorize, do cross val)
+*) wrote basic vectorizing code (just hash each word)
+*) tried svm on basic vectorizing, got ~70% accuracy
