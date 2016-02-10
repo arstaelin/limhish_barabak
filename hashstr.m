@@ -5,7 +5,7 @@ function [hash] = hashstr(str)
 % inputs,
 %   str : The text string cell.
 % outputs,
-%   hash : The hash value array, integer value between 0 and 2^32-1
+%   hash : The hash value array, integer value between 0 and 2^30-1
 %
 % sdbm
 %  this algorithm was created for sdbm (a public-domain reimplementation of
@@ -21,7 +21,7 @@ function [hash] = hashstr(str)
 hash = zeros(size(str));
 for i=1:size(str,2)
     for c=str{1,i}
-        hash(i) = mod(hash(i) * 65599 + double(c), 2^32-1);
+        hash(i) = mod(hash(i) * 65599 + double(c), 2^30-1);
     end
 end
 
