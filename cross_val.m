@@ -14,6 +14,8 @@ function [ accuracy ] = cross_val( data, labels, ftrain, ftest)
 %   accuracy - 10-fold cross-validation accuracy of ftrain and ftest on
 %       data
 
+n_fold = 3;
+
 % shuffle data:
 I = randperm(size(labels,1));
 labels = labels(I);
@@ -22,9 +24,9 @@ data = data(I);
 error = 0;
 
 % do cross validation:
-for i=1:10
-    lower = int32((size(data,1)*(i-1))/10);
-    upper = int32((size(data,1)*(i))/10) + 1;
+for i=1:n_fold
+    lower = int32((size(data,1)*(i-1))/n_fold);
+    upper = int32((size(data,1)*(i))/n_fold) + 1;
     training_data = data([1:lower ,upper:size(data,1)],:);
     training_labels = labels([1:lower ,upper:size(labels,1)],:);
     testing_data = data(lower+1:upper-1);
