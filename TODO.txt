@@ -1,5 +1,6 @@
 
 Ideas:
+*) FEATURE SELECTION (!!!)
 *) matlab nlp library ( should have stemming :D )
 *) also take into account length (bad reviews are shorter?)
 *) use word2vec to get more data from words
