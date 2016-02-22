@@ -17,7 +17,7 @@ function [ vectors ] = folder_to_vectors( directory, vec_func )
             %fileID = fopen(filename, 'r');
             %file_content = fscanf(fileID, '%s');
             file_content = fileread(filename);
-            fclose(fileID);
+            %fclose(fileID);
             vectors{curr_cell, 1} = vec_func(file_content);
             curr_cell = curr_cell + 1;
         end
