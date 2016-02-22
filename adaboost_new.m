@@ -31,11 +31,7 @@ function [estimateclasstotal, model] = adaboost_new (...
         model=struct;
         
         %converts data to sparse matrix
-        required_freq = 250;
         datafeatures = convert_to_vec(datafeatures);
-        freqs = sum(datafeatures);
-        words_used = (freqs >= required_freq);
-        datafeatures = datafeatures(:,words_used);
         
         % Inverse every negatively-classified row
         data_length = length(dataclass);
