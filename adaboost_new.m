@@ -21,6 +21,8 @@ function [estimateclasstotal, model] = adaboost_new (...
 %               
 %  Function is written by D.Kroon University of Twente (August 2010)
 %  Edited to match our needs (February 2016)
+
+    %datafeatures = convert_to_vec(datafeatures);
     
     switch(mode)
     case 'train'

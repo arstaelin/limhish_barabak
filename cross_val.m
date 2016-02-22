@@ -30,7 +30,7 @@ for i=1:n_fold
     training_data = data([1:lower ,upper:size(data,1)],:);
     training_labels = labels([1:lower ,upper:size(labels,1)],:);
     testing_data = data(lower+1:upper-1,:);
-    testing_labels = labels(lower+1:upper-1);
+    testing_labels = labels(lower+1:upper-1,:);
     
     % train and test:
     m = ftrain(training_data, training_labels);
