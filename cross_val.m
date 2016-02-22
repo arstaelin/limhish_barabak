@@ -14,7 +14,7 @@ function [ accuracy ] = cross_val( data, labels, ftrain, ftest)
 %   accuracy - 10-fold cross-validation accuracy of ftrain and ftest on
 %       data
 
-n_fold = 3;
+n_fold = 5;
 
 % shuffle data:
 I = randperm(size(labels,1));
@@ -25,6 +25,7 @@ error = 0;
 
 % do cross validation:
 for i=1:n_fold
+    disp('round');
     lower = int32((size(data,1)*(i-1))/n_fold);
     upper = int32((size(data,1)*(i))/n_fold) + 1;
     training_data = data([1:lower ,upper:size(data,1)],:);
@@ -34,6 +35,7 @@ for i=1:n_fold
     
     % train and test:
     m = ftrain(training_data, training_labels);
+    disp('part 2');
     predictions = ftest(m, testing_data);
     error = error + sum(predictions ~= testing_labels);
 end

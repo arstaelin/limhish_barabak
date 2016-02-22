@@ -21,7 +21,7 @@ function [estimateclasstotal, model] = adaboost (...
 %               
 %  Function is written by D.Kroon University of Twente (August 2010)
 %  Edited to match our needs (February 2016)
-
+    
     switch(mode)
     case 'train'
         % Train the adaboost model
@@ -37,14 +37,13 @@ function [estimateclasstotal, model] = adaboost (...
         % This variable will contain the results of the single weak
         % classifiers weight by their alpha
         estimateclasssum=zeros(size(dataclass));
-
         [labels, mat] = map_significants( datafeatures, dataclass);
-        
+        timerVal = tic;
         % Do all model training itterations
         for t=1:itt
             % Find the best treshold to separate the data in two classes
             [estimateclass, err, h , classmult] = find_best( ...
-    labels, mat, classes, weights);
+    labels, mat, dataclass, D);
 
             % Weak classifier influence on total result is based on the current
             % classification error
@@ -54,9 +53,9 @@ function [estimateclasstotal, model] = adaboost (...
             model(t).alpha = alpha;
             model(t).key=h.key;
             model(t).factor=h.factor;
-
+            
             % We update D so that wrongly classified samples will have more weight
-            D = D.* exp(-model(t).alpha.*dataclass.*estimateclass); %TODO: last multipication is classmult
+            D = D.* exp(-model(t).alpha.*classmult); 
             D = D./sum(D);
             
             % Calculate the current error of the cascade of weak
@@ -66,7 +65,7 @@ function [estimateclasstotal, model] = adaboost (...
             model(t).error=sum(estimateclasstotal~=dataclass)/length(dataclass);
             if(model(t).error==0), break; end
         end
-        
+        toc(timerVal);
     case 'apply' 
         % Apply Model on the test data
         model=dataclass_or_model;
@@ -74,13 +73,15 @@ function [estimateclasstotal, model] = adaboost (...
     
         % Add all results of the single weak classifiers weighted by their alpha 
         estimateclasssum=zeros(size(datafeatures,1),1);
+        timerVal = tic;
         for t=1:length(model);
             estimateclasssum = estimateclasssum + model(t).alpha * ...
                 weak_classify_multi(model(t), datafeatures);
         end
+        toc(timerVal);
         % If the total sum of all weak classifiers
         % is less than zero it is probablly class -1 otherwise class 1;
-        estimateclasstotal=sign(estimateclasssum);
+        estimateclasstotal=-sign(estimateclasssum);
         
     otherwise
         error('adaboost:inputs','unknown mode');
@@ -93,7 +94,8 @@ function [ estimateclass, err, h , classmult] = find_best( ...
     %Returns its estimates on the data, the error, the model
     
     h = struct;
-    errors = (weights * mat)';
+    
+    errors = mat' * weights;
     [mat_min, argmin] = min(errors);
     [mat_max, argmax] = max(errors);
     mat_max = 1 - mat_max;
@@ -105,6 +107,7 @@ function [ estimateclass, err, h , classmult] = find_best( ...
         col = mat(:,argmin);
         classmult = (-2 * col) + 1; % is a column
         estimateclass = classes;
+        col = logical(col);
         estimateclass(col) = estimateclass(col)*-1; % is a column
     else
         h.key = labels{argmax};
@@ -113,6 +116,7 @@ function [ estimateclass, err, h , classmult] = find_best( ...
         col = mat(:,argmax);
         classmult = (2 * col) - 1; % is a column
         estimateclass = classes;
+        col = logical(col);
         estimateclass(col) = estimateclass(col)*-1; % is a column
         estimateclass = estimateclass * -1;
     end
@@ -125,7 +129,7 @@ function [result] = weak_classify_multi (h, maps)
     num_maps = num_maps(1) * num_maps(2);
     result = zeros(num_maps, 1);
     for i = 1:num_maps
-        result(i) = weak_classify(h, maps{i}, key_parts(1), key_parts(2));
+        result(i) = weak_classify(h, maps{i}, key_parts{1}, key_parts{2});
     end
 end
 

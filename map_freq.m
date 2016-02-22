@@ -23,9 +23,9 @@ function update_map(map, text)
         'doesnt','wont','havent','hasnt','hadnt','neither','nor', ...
         'nothing','nowhere','hardly','rarely','scarcely','seldom'};
     factor = 1;
-    if ~isempty(intersect(sliced_text, negative))
-        factor = -1;
-    end
+    %if ~isempty(intersect(sliced_text, negative))
+     %   factor = -1;
+    %end
     for word_cell=sliced_text
         word = word_cell{1};
         if ~isempty(word)

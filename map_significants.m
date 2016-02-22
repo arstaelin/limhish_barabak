@@ -36,25 +36,28 @@ end
 
 function [ significants ] = find_significants( maps )
     %Returns row cell-array of significant strings
-    sign_factor = 0.07;
-
+    sign_factor = 0.03;
     histogram = containers.Map;
-    for map_cell = maps
+    maps_tag = maps';
+    for map_cell = maps_tag
         map = map_cell{1};
-        for word = keys(map)
-           if isKey(histogram, word)
-               histogram(word) = histogram(word) + 1;
-           else    
-               histogram(word) = 1;
-           end
+        for word_cell = keys(map)
+            word = word_cell{1};
+            if isKey(histogram, word)
+                histogram(word) = histogram(word) + 1;
+            else    
+                histogram(word) = 1;
+            end
         end
     end
     num_maps = size(maps);
     num_maps = num_maps(1) * num_maps(2);
     significants = {};
-    for word = keys(histogram)
-        if histograms(word)/num_maps >= sign_factor
+    for word_cell = keys(histogram)
+        word = word_cell{1};
+        if histogram(word)/num_maps >= sign_factor
             significants = [ significants, {word}];
         end
     end
+    size(significants)
 end
