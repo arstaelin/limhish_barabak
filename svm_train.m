@@ -4,7 +4,7 @@ function [ model ] = svm_train( training_data, training_labels )
 required_freq = 250;
 
 % set to radial kernel with default parameters and extra cache size (for now)
-svm_params = '-s 2 -t 2 -m 3000 -q';
+svm_params = '-m 3000 -q';
 
 training_data = convert_to_vec(training_data);
 
