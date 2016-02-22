@@ -30,14 +30,8 @@ function [estimateclasstotal, model] = adaboost_new (...
         dataclass=dataclass_or_model(:);
         model=struct;
         
-<<<<<<< HEAD
         %converts data to sparse matrix
         datafeatures = convert_to_vec(datafeatures);
-=======
-        %TODO: change datafeatures from cell column vector of row vectors
-        %into matrix. That is: from this point we assume that datafeatures
-        %is the sparse appearance-matrix.
->>>>>>> 2bece67ce803c65306a69d86a97b36f73f087aef
         
         % Inverse every negatively-classified row
         data_length = length(dataclass);
