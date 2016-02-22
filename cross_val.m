@@ -19,7 +19,7 @@ n_fold = 5;
 % shuffle data:
 I = randperm(size(labels,1));
 labels = labels(I);
-data = data(I);
+data = data(I,:);
 
 error = 0;
 
@@ -29,7 +29,7 @@ for i=1:n_fold
     upper = int32((size(data,1)*(i))/n_fold) + 1;
     training_data = data([1:lower ,upper:size(data,1)],:);
     training_labels = labels([1:lower ,upper:size(labels,1)],:);
-    testing_data = data(lower+1:upper-1);
+    testing_data = data(lower+1:upper-1,:);
     testing_labels = labels(lower+1:upper-1);
     
     % train and test:

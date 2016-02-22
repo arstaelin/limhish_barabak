@@ -30,13 +30,8 @@ function [estimateclasstotal, model] = adaboost_new (...
         dataclass=dataclass_or_model(:);
         model=struct;
         
-        %converts data to sparse matrix
-        datafeatures = convert_to_vec(datafeatures);
-        
         % Inverse every negatively-classified row
-        data_length = length(dataclass);
-        datafeatures = spdiags(dataclass, 0, data_length, data_length) ...
-            * datafeatures;
+        datafeatures = diag(dataclass) * datafeatures;
         
         % Weight of training samples, first every sample is even important
         % (same weight)
@@ -90,7 +85,7 @@ function [estimateclasstotal, model] = adaboost_new (...
         toc(timerVal);
         % If the total sum of all weak classifiers
         % is less than zero it is probablly class -1 otherwise class 1;
-        estimateclasstotal=-sign(estimateclasssum);
+        estimateclasstotal=sign(estimateclasssum);
         
     otherwise
         error('adaboost:inputs','unknown mode');
