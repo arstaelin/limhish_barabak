@@ -10,9 +10,10 @@ for i=1:size(ada_data,1)
 end
 
 %run adaboost feature selection
-ada_model = adaboost_train(ada_data, labels);
-word_cell = adaboost_model_to_cell(ada_model);
-words_used = array(word_cell);
+ada_model = adaboost_train(ada_data, training_labels);
+word_cell = adaboost_model_to_cell(ada_model,0);
+words_used = cellfun(@str2num, word_cell);
+words_used = unique(words_used);
 training_data = training_data(:, words_used);
 
 % set to radial kernel with default parameters and extra cache size (for now)
