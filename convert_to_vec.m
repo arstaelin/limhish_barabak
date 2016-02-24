@@ -15,6 +15,6 @@ for i=1:size(inp,1)
     vals = [vals ones(1,size(unq,2))];
 end
 
-sparse_vector = sparse(row_ind,col_ind,vals);
+sparse_vector = sparse(row_ind,col_ind,vals,size(inp,1),2^30);
 
 end
