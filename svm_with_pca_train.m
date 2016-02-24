@@ -3,7 +3,7 @@ function [ model ] = svm_with_pca_train( training_data, training_labels )
 %and returns the model
 
 % set required freq and num of features
-required_freq = 25;
+required_freq = 250;
 k = 200;
 
 training_data = convert_to_vec(training_data);
@@ -14,13 +14,22 @@ words_used = find(freqs >= required_freq);
 training_data = training_data(:,words_used);
 
 %do pca:
+
+%option 1: (sparse svd)
 [~,~,v] = svds(training_data,k);
+
+%option 2: (convert to full mat and do pca)
+% v = pca(full(training_data));
+% v = v(:,1:k);
+
+%option 3: (use eigs, and normalize means)
 % A = training_data;
 % A2 = A'*A;
 % n = size(training_data, 1);
 % mns = sum(training_data)/size(training_data,1);
 % [v,~] = eigs(@(x)(A2*x - mns'*sum(A*x) - (mns*x)*sum(A)' + n*(mns*x)*mns')...
 %     ,size(training_data,2),k);
+
 training_data = training_data*v;
 
 % set to radial kernel with default parameters and extra cache size (for now)
