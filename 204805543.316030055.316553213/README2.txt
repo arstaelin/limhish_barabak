@@ -1,6 +1,6 @@
 # This project is the Machine Learning project of:
 # Alexander Ar-Staelin 204805543
-# Nir Magrafta ???
+# Nir Magrafta 316030055
 # Orr Dermer 316553213
 
 Attached are scripts for our machine learning algorithms. The algorithm we
