@@ -1,0 +1,8 @@
+Files that need to be included in the zip file:
+adaboost.m
+adaboost_test.m
+go_adaboost.m
+map_freq.m
+map_significants.m
+model_adaboost.mat
+run_classifier.m
