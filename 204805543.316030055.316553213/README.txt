@@ -43,6 +43,10 @@ go_mi_pca_svm.m - [accuracy 87%] Description: Vectorization of text reviews
             first 500 principal components, out of 1500 words with the most
             mutual information, concerning the label vector.
 
+Feature selection - Mutual Information: An information theoretic definition - the information (can be interpreted as the number of bits) of the info one r.v. gives on anoter r.v. . We use this to mesure the MI between the r.v.s of "does the review contain a word" to the r.v. "the text is a positive review". The words with the most mutual information are chosen to reduce noise of word which contain very little information.
+
+Feature selection - Frequency: We mesure the frequency of a word in the texts, and use it in the classifier iff it appears often (1% or more, for example).
+
 
 (**) svm-select is based on this paper:
 http://sparc.nfu.edu.tw/~ijeti/download/V2-no2-113-125.pdf
