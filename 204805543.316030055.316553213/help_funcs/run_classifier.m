@@ -23,7 +23,7 @@ function run_classifier( directory, model, vectorfunc, classfunc )
     vectors = vectors(1:curr_cell-1, 1); 
     file_names = file_names(1:curr_cell-1, 1); 
    
-    num_vectors = len(vectors);
+    num_vectors = length(vectors);
     
     %Run the classifier on the vectors and fix -1 to 0
     classes = classfunc(model, vectors);
