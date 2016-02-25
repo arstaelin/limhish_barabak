@@ -43,6 +43,10 @@ go_mi_pca_svm.m - [accuracy 87%] Description: Vectorization of text reviews
             first 500 principal components, out of 1500 words with the most
             mutual information, concerning the label vector.
 
+go_naive_bayes,m - [accuracy 83%] Description: Uses MatLab's built in naive
+            bayes classifiers. Uses a bag of words, of all words that
+            appear in at least 0.01 of all texts.
+
 
 (**) svm-select is based on this paper:
 http://sparc.nfu.edu.tw/~ijeti/download/V2-no2-113-125.pdf
