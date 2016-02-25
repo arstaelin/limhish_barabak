@@ -32,7 +32,7 @@ function run_classifier( directory, model, vectorfunc, classfunc )
     %Output results to 'predicted.txt'
     fileID = fopen('predicted.txt', 'w');
     for i = 1:num_vectors
-       fprintf(fileID, [file_names{i}, '\t', int2str(classes(i))]);
+       fprintf(fileID, [file_names{i}, '\t', int2str(classes(i)), '\n']);
     end
     fclose(fileID);
 end
