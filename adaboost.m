@@ -38,7 +38,6 @@ function [estimateclasstotal, model] = adaboost (...
         % classifiers weight by their alpha
         estimateclasssum=zeros(size(dataclass));
         [labels, mat] = map_significants( datafeatures, dataclass);
-        timerVal = tic;
         % Do all model training itterations
         for t=1:itt
             % Find the best treshold to separate the data in two classes
@@ -65,7 +64,6 @@ function [estimateclasstotal, model] = adaboost (...
             model(t).error=sum(estimateclasstotal~=dataclass)/length(dataclass);
             if(model(t).error==0), break; end
         end
-        toc(timerVal);
     case 'apply' 
         % Apply Model on the test data
         model=dataclass_or_model;
@@ -73,12 +71,10 @@ function [estimateclasstotal, model] = adaboost (...
     
         % Add all results of the single weak classifiers weighted by their alpha 
         estimateclasssum=zeros(size(datafeatures,1),1);
-        timerVal = tic;
         for t=1:length(model);
             estimateclasssum = estimateclasssum + model(t).alpha * ...
                 weak_classify_multi(model(t), datafeatures);
         end
-        toc(timerVal);
         % If the total sum of all weak classifiers
         % is less than zero it is probablly class -1 otherwise class 1;
         estimateclasstotal=-sign(estimateclasssum);
