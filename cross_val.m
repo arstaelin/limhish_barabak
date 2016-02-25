@@ -38,9 +38,10 @@ for i=1:n_fold
     error = error + sum(predictions ~= testing_labels);
     
     disp(['finished ',num2str(i),' iteration'])
+    disp(['iteration accuracy: ', num2str(1 - sum(predictions ~= testing_labels)/size(testing_labels,1))])
 end
 
-accuracy = error/size(labels,1);
+accuracy = 1 - error/size(labels,1);
 
 end
 

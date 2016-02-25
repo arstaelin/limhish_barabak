@@ -8,7 +8,9 @@ sliced_text = strsplit(text, delimiter, 'CollapseDelimiters', true);
 sliced_text = lower(sliced_text);
 
 for i=1:size(sliced_text, 2)
-    sliced_text{i} = porterStemmer(sliced_text{i});
+    if(size(sliced_text{i})>=2)
+        sliced_text{i} = porterStemmer(sliced_text{i});
+    end
 end
 
 vector = hashstr(sliced_text);
